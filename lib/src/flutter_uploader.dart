@@ -103,6 +103,7 @@ class FlutterUploader {
       return (await _platform.invokeMethod<String>('enqueue', {
         'url': upload.url,
         'method': describeEnum(upload.method),
+        'basePath': upload.basePath,
         'files': (upload.files ?? []).map((e) => e.toJson()).toList(),
         'headers': upload.headers,
         'data': upload.data,
@@ -114,6 +115,7 @@ class FlutterUploader {
       return (await _platform.invokeMethod<String>('enqueueBinary', {
         'url': upload.url,
         'method': describeEnum(upload.method),
+        'basePath': upload.basePath,
         'path': upload.path,
         'headers': upload.headers,
         'tag': upload.tag,

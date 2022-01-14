@@ -7,6 +7,7 @@ abstract class Upload {
   const Upload({
     required this.url,
     required this.method,
+    required this.basePath,
     this.headers = const <String, String>{},
     this.tag,
     this.allowCellular = true,
@@ -17,6 +18,9 @@ abstract class Upload {
 
   /// HTTP method to use for upload (POST,PUT,PATCH)
   final UploadMethod method;
+
+  /// The base path where the files are located.
+  final String basePath;
 
   /// HTTP headers.
   final Map<String, String>? headers;
@@ -37,6 +41,7 @@ class MultipartFormDataUpload extends Upload {
   MultipartFormDataUpload({
     required String url,
     UploadMethod method = UploadMethod.POST,
+    required String basePath,
     Map<String, String>? headers,
     String? tag,
     this.files,
@@ -46,6 +51,7 @@ class MultipartFormDataUpload extends Upload {
         super(
           url: url,
           method: method,
+          basePath: basePath,
           headers: headers,
           tag: tag,
           allowCellular: allowCellular,
@@ -67,6 +73,7 @@ class RawUpload extends Upload {
   const RawUpload({
     required String url,
     UploadMethod method = UploadMethod.POST,
+    required String basePath,
     Map<String, String>? headers,
     String? tag,
     this.path,
@@ -74,6 +81,7 @@ class RawUpload extends Upload {
   }) : super(
           url: url,
           method: method,
+          basePath: basePath,
           headers: headers,
           tag: tag,
           allowCellular: allowCellular,

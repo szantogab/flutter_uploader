@@ -8,6 +8,7 @@ public class UploadTask {
 
   private String url;
   private String method;
+  private String basePath;
   private Map<String, String> headers;
   private Map<String, String> data;
   private List<FileItem> files;
@@ -19,6 +20,7 @@ public class UploadTask {
   public UploadTask(
       String url,
       String method,
+      String basePath,
       List<FileItem> files,
       Map<String, String> headers,
       Map<String, String> data,
@@ -28,6 +30,7 @@ public class UploadTask {
       boolean allowCellular) {
     this.url = url;
     this.method = method;
+    this.basePath = basePath;
     this.files = files;
     this.headers = headers;
     this.data = data;
@@ -75,5 +78,9 @@ public class UploadTask {
 
   public boolean isAllowCellular() {
     return allowCellular;
+  }
+
+  public String getBasePath() {
+    return basePath;
   }
 }

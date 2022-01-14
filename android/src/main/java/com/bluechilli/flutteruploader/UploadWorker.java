@@ -51,6 +51,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
   public static final String ARG_BINARY_UPLOAD = "binaryUpload";
   public static final String ARG_UPLOAD_REQUEST_TAG = "tag";
   public static final String ARG_ID = "primaryId";
+  public static final String ARG_BASE_PATH = "basePath";
   public static final String EXTRA_STATUS_CODE = "statusCode";
   public static final String EXTRA_STATUS = "status";
   public static final String EXTRA_ERROR_MESSAGE = "errorMessage";
@@ -114,6 +115,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
     String headersJson = getInputData().getString(ARG_HEADERS);
     String parametersJson = getInputData().getString(ARG_DATA);
     String filesJson = getInputData().getString(ARG_FILES);
+    String basePath = getInputData().getString(ARG_BASE_PATH);
     tag = getInputData().getString(ARG_UPLOAD_REQUEST_TAG);
 
     if (tag == null) {
@@ -146,7 +148,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
 
       if (isBinaryUpload) {
         final FileItem item = files.get(0);
-        File file = new File(context.getDataDir(), item.getPath());
+        File file = new File(basePath, item.getPath());
         Log.d("Flutter Uploader",file.getAbsolutePath());
         if (!file.exists()) {
           return Result.failure(
@@ -165,7 +167,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
         MultipartBody.Builder formRequestBuilder = prepareRequest(parameters, null);
         int fileExistsCount = 0;
         for (FileItem item : files) {
-          File file = new File(context.getDataDir(), item.getPath());
+          File file = new File(basePath, item.getPath());
           Log.d(TAG, "attaching file: " + file.getAbsolutePath());
 
           if (file.exists() && file.isFile()) {

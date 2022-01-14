@@ -88,6 +88,7 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
   private void enqueue(MethodCall call, MethodChannel.Result result) {
     String url = call.argument("url");
     String method = call.argument("method");
+    String basePath = call.argument("basePath");
     List<Map<String, String>> files = call.argument("files");
     Map<String, String> parameters = call.argument("data");
     Map<String, String> headers = call.argument("headers");
@@ -123,6 +124,7 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
             new UploadTask(
                 url,
                 method,
+                basePath,
                 items,
                 headers,
                 parameters,
@@ -234,6 +236,7 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
     Data.Builder dataBuilder =
         new Data.Builder()
             .putString(UploadWorker.ARG_URL, task.getURL())
+            .putString(UploadWorker.ARG_BASE_PATH, task.getBasePath())
             .putString(UploadWorker.ARG_METHOD, task.getMethod())
             .putInt(UploadWorker.ARG_REQUEST_TIMEOUT, task.getTimeout())
             .putBoolean(UploadWorker.ARG_BINARY_UPLOAD, task.isBinaryUpload())
