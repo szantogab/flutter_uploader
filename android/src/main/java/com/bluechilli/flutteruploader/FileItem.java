@@ -8,7 +8,7 @@ public class FileItem {
   private String p;
 
   public FileItem(String path) {
-    this.path = path;
+    this.p = path;
   }
 
   public FileItem(String path, String fieldname) {
