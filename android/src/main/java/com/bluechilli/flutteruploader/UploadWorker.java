@@ -146,7 +146,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
 
       if (isBinaryUpload) {
         final FileItem item = files.get(0);
-        File file = new File(item.getPath());
+        File file = new File(context.getFilesDir(), item.getPath());
 
         if (!file.exists()) {
           return Result.failure(
