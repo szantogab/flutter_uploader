@@ -151,6 +151,7 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
   private void enqueueBinary(MethodCall call, MethodChannel.Result result) {
     String url = call.argument("url");
     String method = call.argument("method");
+    String basePath = call.argument("basePath");
     String path = call.argument("path");
     Map<String, String> headers = call.argument("headers");
     String tag = call.argument("tag");
@@ -180,6 +181,7 @@ public class MethodCallHandlerImpl implements MethodCallHandler {
             new UploadTask(
                 url,
                 method,
+                basePath,
                 Collections.singletonList(new FileItem(path)),
                 headers,
                 Collections.emptyMap(),
