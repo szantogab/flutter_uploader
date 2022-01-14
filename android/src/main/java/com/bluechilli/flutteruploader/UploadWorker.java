@@ -146,7 +146,7 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
 
       if (isBinaryUpload) {
         final FileItem item = files.get(0);
-        File file = new File(context.getFilesDir(), item.getPath());
+        File file = new File(context.getDataDir(), item.getPath());
         Log.d("Flutter Uploader",file.getAbsolutePath());
         if (!file.exists()) {
           return Result.failure(
@@ -165,9 +165,8 @@ public class UploadWorker extends ListenableWorker implements CountProgressListe
         MultipartBody.Builder formRequestBuilder = prepareRequest(parameters, null);
         int fileExistsCount = 0;
         for (FileItem item : files) {
-          File file = new File(context.getFilesDir(), item.getPath());
-          Log.d("Flutter Uploader",file.getAbsolutePath());
-          Log.d(TAG, "attaching file: " + item.getPath());
+          File file = new File(context.getDataDir(), item.getPath());
+          Log.d(TAG, "attaching file: " + file.getAbsolutePath());
 
           if (file.exists() && file.isFile()) {
             fileExistsCount++;
