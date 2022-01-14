@@ -20,5 +20,5 @@ class FileItem {
   String toString() => 'FileItem(path: $path fieldname:$field)';
 
   /// JSON representation for sharing with the underlying platform.
-  Map<String, dynamic> toJson() => {'path': path, 'fieldname': field};
+  Map<String, dynamic> toJson() => {'p': path, 'f': field};
 }

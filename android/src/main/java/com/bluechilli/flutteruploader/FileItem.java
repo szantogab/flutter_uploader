@@ -4,27 +4,27 @@ import java.util.Map;
 
 public class FileItem {
 
-  private String fieldname;
-  private String path;
+  private String f;
+  private String p;
 
   public FileItem(String path) {
     this.path = path;
   }
 
   public FileItem(String path, String fieldname) {
-    this.fieldname = fieldname;
-    this.path = path;
+    this.f = fieldname;
+    this.p = path;
   }
 
   public static FileItem fromJson(Map<String, String> map) {
-    return new FileItem(map.get("path"), map.get("fieldname"));
+    return new FileItem(map.get("p"), map.get("f"));
   }
 
   public String getFieldname() {
-    return fieldname;
+    return f;
   }
 
   public String getPath() {
-    return path;
+    return p;
   }
 }
